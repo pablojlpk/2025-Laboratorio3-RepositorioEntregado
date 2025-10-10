@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.programas.inmoprop.ui.inicio.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.programas.inmoprop.ui.perfil.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.programas.inmoprop.ui.inmuebles.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" >
+        <action
+            android:id="@+id/action_nav_slideshow_to_detalleInmuebleFragment"
+            app:destination="@id/detalleInmuebleFragment" />
+        <action
+            android:id="@+id/action_nav_slideshow_to_altaInmuebleFragment"
+            app:destination="@id/altaInmuebleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_contrato"
+        android:name="com.programas.inmoprop.ui.contrato.ContratoFragment"
+        android:label="@string/menu_contrato"
+        tools:layout="@layout/fragment_contrato" >
+        <action
+            android:id="@+id/action_nav_contrato_to_detalleContratoFragment"
+            app:destination="@id/detalleContratoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.programas.inmoprop.ui.logout.LogoutFragment"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/fragment_logout" />
+    <fragment
+        android:id="@+id/nav_inquilino"
+        android:name="com.programas.inmoprop.ui.inquilino.InquilinoFragment"
+        android:label="@string/menu_inquilino"
+        tools:layout="@layout/fragment_inquilino" />
+    <fragment
+        android:id="@+id/detalleInmuebleFragment"
+        android:name="com.programas.inmoprop.ui.inmuebles.DetalleInmuebleFragment"
+        android:label="fragment_detalle_inmueble"
+        tools:layout="@layout/fragment_detalle_inmueble" >
+        <action
+            android:id="@+id/action_detalleInmuebleFragment_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalleContratoFragment"
+        android:name="com.programas.inmoprop.ui.contrato.DetalleContratoFragment"
+        android:label="fragment_detalle_contrato"
+        tools:layout="@layout/fragment_detalle_contrato" >
+        <action
+            android:id="@+id/action_detalleContratoFragment_to_nav_contrato"
+            app:destination="@id/nav_contrato" />
+    </fragment>
+    <fragment
+        android:id="@+id/altaInmuebleFragment"
+        android:name="com.programas.inmoprop.ui.inmuebles.AltaInmuebleFragment"
+        android:label="fragment_alta_inmueble"
+        tools:layout="@layout/fragment_alta_inmueble" >
+        <action
+            android:id="@+id/action_altaInmuebleFragment_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+    </fragment>
+</navigation>
