@@ -2,6 +2,7 @@ package com.programas.inmoprop.request;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,9 +28,9 @@ public class ApiClient {
 
 
     //public static final String URLBASE ="http://192.168.0.169:5126/api/";// casa
-    //public static final String URLBASE = "http://10.0.2.2:5126/api/";//virtual
+    public static final String URLBASE = "http://10.0.2.2:5126/api/";//virtual
 
-  public static final String URLBASE = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/";//virtual
+  //public static final String URLBASE = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/";//virtual
 
 
     public static InmmobiliariaSetvice getApiInmobiliaria() {
@@ -49,13 +50,16 @@ public class ApiClient {
     public static void setToken(Context context, String token) {
         SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("token", "Bearer "+token);
+        editor.putString("token", token);
         editor.apply();
     }
 
     public static String getToken(Context context) {
         SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
+        Log.d("tokenobtenidoleido", sp.getString("token", null));
+
         return sp.getString("token", null);
+
     }
 
 
@@ -64,11 +68,14 @@ public class ApiClient {
 
         @FormUrlEncoded//APuntaa la api de prueba retrofit
         @POST("/api/Propietarios/login")
-        Call<String> login(@Field("usuario") String usuario_, @Field("clave") String clave_);
-
-
+        Call<String> loginToken(@Field("usuario") String usuario_, @Field("clave") String clave_);
 
         @FormUrlEncoded
+        @POST("propietario/login")
+        Call<String> login(@Field("mail") String mail_, @Field("clave") String clave_);
+
+
+        @FormUrlEncoded//apunta a la api mia
         @POST("propietario/login")
         Call<String> obtenerPropietario(@Field("mail") String mail_, @Field("clave") String clave_);
         //metodo abstracto entre comillas nombre campo bd en este caso propietarios con el call le digo que tipo de formato me va a devolver
@@ -76,8 +83,8 @@ public class ApiClient {
 
 //obtener propietario con token
 
-        @GET("propietarios")
-        Call<Propietario> obtenerP(@Header("Authorization") String  token);
+        @GET("propietario")
+        Call<String> obtenerP(@Header("Authorization") String token);
 /// /////
         @FormUrlEncoded
         @PUT("propietario/actualizar")

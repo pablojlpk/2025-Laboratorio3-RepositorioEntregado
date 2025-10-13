@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -56,9 +58,21 @@ public class MainActivityViewModel extends AndroidViewModel {
                 if (response.isSuccessful()) { //pregunto si la respuesta es satisfactoria
                     mMensaje.postValue("Bienvenido ");
                     String token=response.body();
-                    ApiClient.setToken(context,token);
-                    Log.d("tokenobtenido",ApiClient.getToken(context));
+                    ApiClient.setToken(context,"Bearer "+token);
+                    Log.d("tokenobtenido",token);
 
+
+                    //
+                    //Bundle bundle = new Bundle();
+                    //String usu= "usuario prueba";
+                    //String mail="maildeprueba@pp";
+                    Intent intent = new Intent(context, MenuActivity.class);
+                    //intent.putExtra("usuario", usu);
+                    //intent.putExtra("mail", mail);
+                    //intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                    //
 
                 } else {
                     mMensaje.postValue("Usuario y/o contraseña Incorrecta; reintente");

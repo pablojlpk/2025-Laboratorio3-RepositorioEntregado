@@ -11,6 +11,9 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,8 +27,11 @@ import com.programas.inmoprop.modelos.Propietario;
 public class MenuActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
     private ActivityMenuBinding binding;
-     private Propietario propietario;
+
+    private MenuActivityViewModel vm;
+    private Propietario propietario;
     private int idprop;
 
 
@@ -42,25 +48,34 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
+        vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MenuActivityViewModel.class);
         setContentView(binding.getRoot());
-        String usuario=getIntent().getStringExtra("usuario");
-        String mail=  getIntent().getStringExtra("mail");
-        String idpropietario=  getIntent().getStringExtra("idpropietario");
-        //idprop= getIntent().getIntExtra("idpropietario",0);
-        propietario= (Propietario) getIntent().getSerializableExtra("propietario");
-        idprop= Integer.parseInt(String.valueOf(propietario.getIdpropietario()));
+
+        //String usuario=getIntent().getStringExtra("usuario");
+        //String mail=  getIntent().getStringExtra("mail");
+        //String idpropietario=  getIntent().getStringExtra("idpropietario");
+
+        //propietario= (Propietario) getIntent().getSerializableExtra("propietario");
+//        idprop= Integer.parseInt(String.valueOf(propietario.getIdpropietario()));
 
 ///accedo para setear los datos en el header del menú
 
         NavigationView nv=findViewById(R.id.nav_view);
         View hv=nv.getHeaderView(0);
         TextView tv=hv.findViewById(R.id.textView);
-        tv.setText("Usuario: "+usuario+"\n Mail: "+mail+"-"+idprop);
-        ///
+        vm.getmPropietario().observe(this, new Observer<Propietario>() {
+            @Override
+            public void onChanged(Propietario prop) {
+                String usuario=prop.getNombre()+" "+prop.getApellido();
+                String mail=prop.getMail();
+                String idpropietario=String.valueOf(prop.getIdpropietario());
+                idprop=Integer.parseInt(idpropietario);
+                tv.setText("Usuario: "+usuario+"\n Mail: "+mail+"-"+idprop);
+                propietario=prop;
 
-        Log.d("datosusuario", "onCreate: "+usuario+" "+mail);
-
-        setSupportActionBar(binding.appBarMenu.toolbar);
+            }
+        });
+ setSupportActionBar(binding.appBarMenu.toolbar);
         binding.appBarMenu.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -45,18 +45,40 @@ vm.getmInmueble().observe(getActivity(), new androidx.lifecycle.Observer<Inmuebl
         binding.tvImporte.setText("importe" + i.getImporte() + "");
         binding.tvTipoAmbiente.setText("Tipo Ambiente:"+i.getTipoinmueble());
         binding.tvHabilitado.setText(i.getHabilitado());
-        binding.checkBox.setChecked(vm.obtenerEstadoBool(i.getHabilitado()));
+        vm.obtenerHabilitado(binding.tvHabilitado.getText().toString());
+
+        //binding.checkBox.setChecked(vm.obtenerEstadoBool(i.getHabilitado()));
     }
     });
+
+
+vm.getmHabilitado().observe(getActivity(), new Observer<String>() {
+    @Override
+    public void onChanged(String s) {
+        binding.tvHabilitado.setText(s);
+
+    }
+
+});
+vm.getmEstado().observe(getActivity(), new Observer<Boolean>() {
+    @Override
+    public void onChanged(Boolean aBoolean) {
+        binding.checkBox.setChecked(aBoolean);
+    }
+});
 
 
 binding.checkBox.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                       //binding.tvHabilitado.setText(binding.checkBox.isChecked() ? "SI" : "NO");
-                                        binding.tvHabilitado.setText(vm.obtenerHabilitado(binding.checkBox.isChecked()));
+vm.cambiarEstadoClick(binding.checkBox.isChecked());
+
+
+
                                     }
                                 });
+
+
 
 vm.getmText().observe(getActivity(), new androidx.lifecycle.Observer<String>() {
     @Override

@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+
+
 android {
     namespace = "com.programas.inmoprop"
     compileSdk = 35
@@ -32,6 +34,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {

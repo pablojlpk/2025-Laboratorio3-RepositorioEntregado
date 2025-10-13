@@ -30,8 +30,8 @@ private MainActivityViewModel vm;
 
         setContentView(binding.getRoot());
 
-binding.edTUsuario.setText("luisprofessor@gmail.com");
-binding.edTClave.setText("DEEKQW");
+binding.edTUsuario.setText("omarfuentes@gmail.com");
+binding.edTClave.setText("123");
         vm.getmMensaje().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -46,7 +46,7 @@ binding.edTClave.setText("DEEKQW");
                 String usua=binding.edTUsuario.getText().toString();
                 String clav=binding.edTClave.getText().toString();
                 //vm.controlLogin(usua,clav);
-                //vm.login(usua,clav);
+               // vm.login(usua,clav);
                 vm.loginToken(usua,clav);
 
 

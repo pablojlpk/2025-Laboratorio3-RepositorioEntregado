@@ -27,7 +27,15 @@ public class DetalleInmuebleViewModel extends ViewModel {
 
     private MutableLiveData<Inmueble> mInmueble;
     private MutableLiveData<String> mHabilitado;
+    private  MutableLiveData<Boolean> mEstado;
+
     private MutableLiveData<String> mText;
+    public LiveData<Boolean> getmEstado(){
+        if (mEstado==null) {
+            mEstado=new MutableLiveData<>();
+        }
+        return mEstado;
+    }
 
 
 public LiveData<String> getmText() {
@@ -41,8 +49,7 @@ public LiveData<String> getmText() {
         if (mInmueble == null) {
             mInmueble = new MutableLiveData<>();
             mHabilitado=new MutableLiveData<>();
-
-
+            mEstado=new MutableLiveData<>();
    }
     return mInmueble;
     }
@@ -64,24 +71,25 @@ public LiveData<String> getmText() {
         }
 
     }
-    public Boolean obtenerEstadoBool(String estado){
-        if (estado.equals("SI")) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+//me fijo la variable de habilitado para poder accionar el check
+    public void obtenerHabilitado(String condicion){
+        if (condicion.equals("SI")){
+            mEstado.setValue(true);
 
-    public String obtenerHabilitado(Boolean bestado){
-    if (bestado==true) {
-            return "SI";
+        }else {
+            mEstado.setValue(false);
         }
-        else {
-        return "NO";
-        }
-    }
 
+}
+//me fijo el check para modificar la variable habilitado para alquilar
+public void cambiarEstadoClick(Boolean condicionbooleana){
+        if (condicionbooleana==true){
+            mHabilitado.setValue("SI");
+        }else {
+            mHabilitado.setValue("NO");
+        }
+}
+//actualizo el inmueble
 public void actualizarInmueble(Inmueble inmueble){
         Log.d("inmuebleActualizado",inmueble.getInmuebletoString());
 
