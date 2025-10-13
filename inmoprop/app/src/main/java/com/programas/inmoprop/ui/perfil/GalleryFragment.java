@@ -28,11 +28,9 @@ public class GalleryFragment extends Fragment {
                 new ViewModelProvider(this).get(GalleryViewModel.class);
 */
         vm = new ViewModelProvider(this).get(GalleryViewModel.class);
-
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         context=getContext();
         View root = binding.getRoot();
-
         final TextView textView = binding.textGallery;
         MenuActivity menuActivity = (MenuActivity) getActivity();
 
@@ -56,13 +54,10 @@ binding.btGuardar.setOnClickListener(new View.OnClickListener() {
         p.setApellido(binding.etApellido.getText().toString());
         p.setNombre(binding.etNombre.getText().toString());
         p.setDni(Integer.parseInt(binding.etDni.getText().toString()));
-
         p.setMail(binding.etMail.getText().toString());
         p.setClave(binding.etClave.getText().toString());
         p.setBorrado(false);
-
-
-        vm.actualizarPropietario(p);
+        vm.actualizarPropietario(p,context);
 
 }
 });

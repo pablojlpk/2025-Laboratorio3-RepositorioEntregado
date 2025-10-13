@@ -65,34 +65,44 @@ public class ApiClient {
 
     public interface InmmobiliariaSetvice{
 
-
+/*
         @FormUrlEncoded//APuntaa la api de prueba retrofit
         @POST("/api/Propietarios/login")
         Call<String> loginToken(@Field("usuario") String usuario_, @Field("clave") String clave_);
+*/
 
-        @FormUrlEncoded
-        @POST("propietario/login")
-        Call<String> login(@Field("mail") String mail_, @Field("clave") String clave_);
-
-
+/*
         @FormUrlEncoded//apunta a la api mia
         @POST("propietario/login")
         Call<String> obtenerPropietario(@Field("mail") String mail_, @Field("clave") String clave_);
         //metodo abstracto entre comillas nombre campo bd en este caso propietarios con el call le digo que tipo de formato me va a devolver
         //en una interface el metodo astrapto siempre va a ser public por lo que se lo puedo sacar
 
-//obtener propietario con token
-
-        @GET("propietario")
-        Call<String> obtenerP(@Header("Authorization") String token);
-/// /////
-        @FormUrlEncoded
-        @PUT("propietario/actualizar")
+   @FormUrlEncoded
+        @PUT("propietario/actualizar")//api mia sin token
         Call<String> actualizarPropietario(@Field("idpropietario") int id_,@Field("nombre") String nombre_,
                                            @Field("apellido") String apellido_, @Field("dni") int dni_,
                                            @Field("mail") String mail_, @Field("clave") String clave_,
                                            @Field("borrado") boolean borrado_);
 
+
+*/
+//obtener propietario con token
+@FormUrlEncoded
+@POST("propietario/login")
+Call<String> login(@Field("mail") String mail_, @Field("clave") String clave_);
+
+        @GET("propietario")
+        Call<String> obtenerP(@Header("Authorization") String token);
+
+        //actualizar propietario con token
+        @FormUrlEncoded
+        @PUT("propietario/actualizar")
+        Call<String> actualizarPropietariot(@Field("idpropietario") int id_,@Field("nombre") String nombre_,
+                                           @Field("apellido") String apellido_, @Field("dni") int dni_,
+                                           @Field("mail") String mail_, @Field("clave") String clave_,
+                                           @Field("borrado") boolean borrado_, @Header("Authorization") String token);
+/// /////
 
         @FormUrlEncoded
         @POST("propietario/propiedadesxpropietario")

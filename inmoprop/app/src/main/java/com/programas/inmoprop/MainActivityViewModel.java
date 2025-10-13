@@ -41,7 +41,6 @@ public class MainActivityViewModel extends AndroidViewModel {
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
-
     }
 
     public void setmMensaje() {
@@ -87,6 +86,8 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
         );
     }
+
+    /*
     public void login(String mail, String clave) {
         ApiClient.InmmobiliariaSetvice api = getApiInmobiliaria();
         Call<String> llamada = api.obtenerPropietario(mail, clave);
@@ -129,5 +130,6 @@ public class MainActivityViewModel extends AndroidViewModel {
 
 
     }
+    */
 }
 
