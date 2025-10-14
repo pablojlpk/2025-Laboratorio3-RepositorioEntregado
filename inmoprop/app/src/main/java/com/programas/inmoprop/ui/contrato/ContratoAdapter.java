@@ -75,7 +75,7 @@ public class ContratoViewHolder extends RecyclerView.ViewHolder{
 
             }
         });
-    //falta hacer el botón
+
     }
 
 

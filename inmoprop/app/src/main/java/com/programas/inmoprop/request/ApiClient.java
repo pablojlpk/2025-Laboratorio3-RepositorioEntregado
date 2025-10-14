@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.programas.inmoprop.modelos.Contrato;
 import com.programas.inmoprop.modelos.Inmueble;
+import com.programas.inmoprop.modelos.Pago;
 import com.programas.inmoprop.modelos.Propietario;
 
 import java.util.List;
@@ -88,9 +89,9 @@ public class ApiClient {
 
 */
 //obtener propietario con token
-@FormUrlEncoded
-@POST("propietario/login")
-Call<String> login(@Field("mail") String mail_, @Field("clave") String clave_);
+        @FormUrlEncoded
+        @POST("propietario/login")
+        Call<String> login(@Field("mail") String mail_, @Field("clave") String clave_);
 
         @GET("propietario")
         Call<String> obtenerP(@Header("Authorization") String token);
@@ -102,7 +103,13 @@ Call<String> login(@Field("mail") String mail_, @Field("clave") String clave_);
                                            @Field("apellido") String apellido_, @Field("dni") int dni_,
                                            @Field("mail") String mail_, @Field("clave") String clave_,
                                            @Field("borrado") boolean borrado_, @Header("Authorization") String token);
-/// /////
+        @FormUrlEncoded//busco pagos
+        @POST("pago/actuales")
+
+        Call<List<Pago>> obtenerPagosContrato(@Field("idcontrato") int idcontrato_, @Header("Authorization") String token);
+
+
+        /// /////
 
         @FormUrlEncoded
         @POST("propietario/propiedadesxpropietario")

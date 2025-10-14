@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,6 +61,17 @@ public class DetalleContratoFragment extends Fragment {
                 );
         binding.etDni.setText("DNI:" + contrato.getDatosinquilino().getDni());
         binding.etMail.setText("MAIL: "+contrato.getDatosinquilino().getMail());
+
+        binding.btPagos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+              bundle.putInt("codigocontrato",contrato.getIdcontrato());
+Log.d("pago",bundle.toString());
+                Navigation.findNavController(v).navigate(R.id.action_detalleContratoFragment_to_pagosContratoFragment,bundle);
+
+            }
+        });
 }
     });
     vm.obtenerContrato(bundle);

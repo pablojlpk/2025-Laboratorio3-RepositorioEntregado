@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_detalleContratoFragment_to_nav_contrato"
             app:destination="@id/nav_contrato" />
+        <action
+            android:id="@+id/action_detalleContratoFragment_to_pagosContratoFragment"
+            app:destination="@id/pagosContratoFragment" />
     </fragment>
     <fragment
         android:id="@+id/altaInmuebleFragment"
@@ -74,5 +77,14 @@
         <action
             android:id="@+id/action_altaInmuebleFragment_to_nav_slideshow"
             app:destination="@id/nav_slideshow" />
+    </fragment>
+    <fragment
+        android:id="@+id/pagosContratoFragment"
+        android:name="com.programas.inmoprop.ui.contrato.PagosContratoFragment"
+        android:label="fragment_pagos_contrato"
+        tools:layout="@layout/fragment_pagos_contrato" >
+        <action
+            android:id="@+id/action_pagosContratoFragment_to_detalleContratoFragment"
+            app:destination="@id/detalleContratoFragment" />
     </fragment>
 </navigation>
