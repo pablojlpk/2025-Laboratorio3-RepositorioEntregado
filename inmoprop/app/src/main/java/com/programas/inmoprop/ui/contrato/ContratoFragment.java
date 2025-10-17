@@ -35,14 +35,13 @@ private ContratoViewModel vm;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        //ContratoViewModel contratoViewModel =
-          //      new ViewModelProvider(this).get(ContratoViewModel.class);
 
         vm=new ViewModelProvider(this).get(ContratoViewModel.class);
         binding = FragmentContratoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        context=getContext();
         final TextView textView = binding.textContrato;
-        //vm.getmText().observe(getViewLifecycleOwner(), textView::setText);
+
         vm.getmText().observe(getViewLifecycleOwner(), new Observer<String>() {
     @Override
     public void onChanged(String s) {
@@ -58,15 +57,12 @@ private ContratoViewModel vm;
                 binding.lista.setLayoutManager(glm);
                 binding.lista.setAdapter(ca);
 
-
-
-
             }
         });
 
         MenuActivity menuActivity = (MenuActivity) getActivity();
         int idp= menuActivity.getIdprop();
-        vm.obtenerContratos(idp);
+        vm.obtenerContratos(idp, getContext());
 
         return root;
 

@@ -48,16 +48,16 @@ public class GalleryFragment extends Fragment {
 binding.btGuardar.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Propietario p=new Propietario();
+    Propietario p = new Propietario();
+        String idpropietario=menuActivity.getPropietario().getIdpropietario()+"";
+        String apellido=binding.etApellido.getText().toString();
+        String nombre=binding.etNombre.getText().toString();
+        String dni=binding.etDni.getText().toString();
+        String mail=binding.etMail.getText().toString();
+        String clave=binding.etClave.getText().toString();
+        Boolean borrado=false;
 
-        p.setIdpropietario(menuActivity.getPropietario().getIdpropietario());
-        p.setApellido(binding.etApellido.getText().toString());
-        p.setNombre(binding.etNombre.getText().toString());
-        p.setDni(Integer.parseInt(binding.etDni.getText().toString()));
-        p.setMail(binding.etMail.getText().toString());
-        p.setClave(binding.etClave.getText().toString());
-        p.setBorrado(false);
-        vm.actualizarPropietario(p,context);
+        vm.actualizarPropietario(idpropietario,apellido,nombre,dni,mail,clave,borrado, context);
 
 }
 });

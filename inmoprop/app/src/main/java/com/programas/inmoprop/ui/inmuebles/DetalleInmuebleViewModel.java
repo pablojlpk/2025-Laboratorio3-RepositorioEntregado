@@ -90,9 +90,9 @@ public void cambiarEstadoClick(Boolean condicionbooleana){
         }
 }
 //actualizo el inmueble
-public void actualizarInmueble(Inmueble inmueble){
+public void actualizarInmueble(Inmueble inmueble,Context context){
         Log.d("inmuebleActualizado",inmueble.getInmuebletoString());
-
+        String token = ApiClient.getToken(context);
         ApiClient.InmmobiliariaSetvice api = ApiClient.getApiInmobiliaria();
     Call<String> llamada=api.actualizarInmueble(
             inmueble.getIdinmueble(),
@@ -106,7 +106,8 @@ public void actualizarInmueble(Inmueble inmueble){
             inmueble.isBorrado(),
             inmueble.getImporte(),
             inmueble.getEstado(),
-            inmueble.getHabilitado()
+            inmueble.getHabilitado(),
+            token
     )
     ;
     llamada.enqueue(new Callback<String>() {

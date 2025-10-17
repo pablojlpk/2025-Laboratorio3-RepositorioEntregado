@@ -19,23 +19,28 @@ public class GalleryViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
 
     public GalleryViewModel() {
-
         mText = new MutableLiveData<>();
         mText.setValue("");
-
-    }
+}
 
     public LiveData<String> getText() {
         return mText;
     }
-
-    public void actualizarPropietario(Propietario propietario, Context context) {
+        public void actualizarPropietario(String idpropietario, String apellido, String nombre, String dni, String mail, String clave, Boolean borrado, Context context)
         {
-            if (propietario.getClave().isEmpty() == true) {
-                mText.setValue("debe ingresar una clave");
+            if  (idpropietario.isEmpty()
+                || apellido.isEmpty()
+                || nombre.isEmpty()
+                || dni.isEmpty()
+                || mail.isEmpty()
+                || clave.isEmpty()
+            ) {
+                mText.setValue("Faltan cargar Datos");
             } else {
                 String token = ApiClient.getToken(context);
                 ApiClient.InmmobiliariaSetvice api = ApiClient.getApiInmobiliaria();
+
+                Propietario propietario = new Propietario(Integer.parseInt(idpropietario), apellido, nombre, Integer.parseInt(dni), mail, clave, borrado );
                 Call<String> llamada = api.actualizarPropietariot(
                         propietario.getIdpropietario(),
                         propietario.getNombre(),
@@ -64,5 +69,5 @@ public class GalleryViewModel extends ViewModel {
             }
         }
     }
-}
+
 

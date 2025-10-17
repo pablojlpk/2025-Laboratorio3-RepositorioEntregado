@@ -30,7 +30,7 @@ public class InquilinoFragment extends Fragment {
 
     private FragmentInquilinoBinding binding;
     private InquilinoViewModel vm;
-    Context context;
+    private Context context;
     public static InquilinoFragment newInstance() {
         return new InquilinoFragment();
     }
@@ -71,7 +71,7 @@ public class InquilinoFragment extends Fragment {
      });
 
      MenuActivity menuActivity = (MenuActivity) getActivity();
-     vm.obtenerInquilinos(menuActivity.getIdprop());
+     vm.obtenerInquilinos(menuActivity.getIdprop(), context );
 return root;
     }
 

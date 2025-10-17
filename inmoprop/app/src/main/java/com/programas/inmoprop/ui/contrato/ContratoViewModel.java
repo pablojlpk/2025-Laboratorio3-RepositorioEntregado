@@ -1,6 +1,7 @@
 package com.programas.inmoprop.ui.contrato;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import retrofit2.Response;
 public class ContratoViewModel extends ViewModel{
     private MutableLiveData<String> mText;
     private MutableLiveData<List<Contrato>> mContratos;
+
     public LiveData<List<Contrato>> getmContratos(){
         if(mContratos==null){
             mContratos=new MutableLiveData<>();
@@ -37,24 +39,16 @@ public class ContratoViewModel extends ViewModel{
         return mText;
     }
 
-    public void obtenerContratos(int id) {
+    public void obtenerContratos(int id, Context context) {
         ApiClient.InmmobiliariaSetvice api = ApiClient.getApiInmobiliaria();
-        Call<List<Contrato>> llamada = api.obtenerContratosActuales(id);
+        String token = ApiClient.getToken(context);
+        Call<List<Contrato>> llamada = api.obtenerContratosActuales(id,token);
         llamada.enqueue(new Callback<List<Contrato>>() {
             @Override
             public void onResponse(Call<List<Contrato>> call, Response<List<Contrato>> response) {
                 if (response.isSuccessful()) {
                     List<Contrato> lista=response.body();
-/*
-                    StringBuilder sb = new StringBuilder();
-                    for (Contrato c : lista) {
-                        sb.append("Contrato;"+c.getIdcontrato()).append("\n");
-                        sb.append("Inmueble:"+c.getDatosinmueble().getIdinmueble()).append("\n");
-                        sb.append("Inquilino:"+c.getDatosinquilino().getApellido()).append("\n");
-                        sb.append("").append("\n\n");
-                    }
-                    mText.setValue(sb.toString());
-*/
+
                     mContratos.setValue(lista);
 
                 }

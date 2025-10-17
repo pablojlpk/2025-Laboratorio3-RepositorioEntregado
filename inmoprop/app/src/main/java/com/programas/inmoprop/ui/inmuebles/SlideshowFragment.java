@@ -48,7 +48,7 @@ public class SlideshowFragment extends Fragment {
 
         MenuActivity menuActivity = (MenuActivity) getActivity();
         int idprop = menuActivity.getIdprop();
-        vm.obtenerPropiedadesxPropietario(idprop);
+        vm.obtenerPropiedadesxPropietario(idprop, getContext());
         //int idinmueble = 15;
 
         vm.getmListado().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
@@ -66,6 +66,7 @@ public class SlideshowFragment extends Fragment {
             public void onClick(View v) {
 
                 Navigation.findNavController((Activity) context, R.id.nav_host_fragment_content_menu).navigate(R.id.altaInmuebleFragment);// se pone donde se va a inflar el fragment
+
             }
         });
 

@@ -1,5 +1,6 @@
 package com.programas.inmoprop.ui.inmuebles;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -24,6 +25,7 @@ public class SlideshowViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
     private  MutableLiveData<List<Inmueble>> mListado;
 
+
     public LiveData<List<Inmueble>> getmListado() {
         if (mListado==null){
             mListado= new MutableLiveData();
@@ -31,8 +33,6 @@ public class SlideshowViewModel extends ViewModel {
 
         return mListado;
     }
-
-
     public SlideshowViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Inmuebles");
@@ -43,29 +43,18 @@ public class SlideshowViewModel extends ViewModel {
     }
 
 
-    public void obtenerPropiedadesxPropietario(int id_){
+    public void obtenerPropiedadesxPropietario(int id_, Context context){
+
         ApiClient.InmmobiliariaSetvice api = ApiClient.getApiInmobiliaria();
-        Call<List<Inmueble>> llamada = api.obtenerPropiedadesxPropietario(id_);
+        String token = ApiClient.getToken(context);
+        Call<List<Inmueble>> llamada = api.obtenerPropiedadesxPropietario(id_, token);
 
         llamada.enqueue(new Callback<List<Inmueble>>() {
             @Override
             public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
                 if (response.isSuccessful()) {
                     List<Inmueble> lista=response.body();
-                    /*
-                    StringBuilder sb = new StringBuilder();
-
-                    for (Inmueble i : lista) {
-                        sb.append(i.getDireccion().toString()).append("\n\n");
-                        //sb.append(i.toString()).append("\n\n");
-                    }
-
-                    mText.setValue(sb.toString());
-                   */
                     mListado.setValue(lista);
-
-                    // mText.setValue("Datos Obtenidos: "+lista.size());
-                    Log.d("listainmuebles",lista.toString());
                 }
                 else {
                     mText.setValue("No posee Propiedades");
@@ -74,7 +63,6 @@ public class SlideshowViewModel extends ViewModel {
             @Override
             public void onFailure(Call<List<Inmueble>> call, Throwable t) {
                 mText.setValue("Error de Servidor");
-
             }
         });
     }

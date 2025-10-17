@@ -24,6 +24,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public class ApiClient {
 
@@ -65,29 +66,6 @@ public class ApiClient {
 
 
     public interface InmmobiliariaSetvice{
-
-/*
-        @FormUrlEncoded//APuntaa la api de prueba retrofit
-        @POST("/api/Propietarios/login")
-        Call<String> loginToken(@Field("usuario") String usuario_, @Field("clave") String clave_);
-*/
-
-/*
-        @FormUrlEncoded//apunta a la api mia
-        @POST("propietario/login")
-        Call<String> obtenerPropietario(@Field("mail") String mail_, @Field("clave") String clave_);
-        //metodo abstracto entre comillas nombre campo bd en este caso propietarios con el call le digo que tipo de formato me va a devolver
-        //en una interface el metodo astrapto siempre va a ser public por lo que se lo puedo sacar
-
-   @FormUrlEncoded
-        @PUT("propietario/actualizar")//api mia sin token
-        Call<String> actualizarPropietario(@Field("idpropietario") int id_,@Field("nombre") String nombre_,
-                                           @Field("apellido") String apellido_, @Field("dni") int dni_,
-                                           @Field("mail") String mail_, @Field("clave") String clave_,
-                                           @Field("borrado") boolean borrado_);
-
-
-*/
 //obtener propietario con token
         @FormUrlEncoded
         @POST("propietario/login")
@@ -103,40 +81,56 @@ public class ApiClient {
                                            @Field("apellido") String apellido_, @Field("dni") int dni_,
                                            @Field("mail") String mail_, @Field("clave") String clave_,
                                            @Field("borrado") boolean borrado_, @Header("Authorization") String token);
-        @FormUrlEncoded//busco pagos
-        @POST("pago/actuales")
-
-        Call<List<Pago>> obtenerPagosContrato(@Field("idcontrato") int idcontrato_, @Header("Authorization") String token);
-
-
-        /// /////
+        //@FormUrlEncoded//busco pagos
+        //@POST("pago/actuales")
+        //Call<List<Pago>> obtenerPagosContrato(@Field("idcontrato") int idcontrato_, @Header("Authorization") String token);
+        @GET("pago/actuales/{idcontrato}")
+        Call<List<Pago>> obtenerPagosContrato(@Path("idcontrato") int idcontrato_, @Header("Authorization") String token);
 
         @FormUrlEncoded
-        @POST("propietario/propiedadesxpropietario")
-        Call <List<Inmueble>> obtenerPropiedadesxPropietario(@Field("idpropietario") int id_);
-
-        @FormUrlEncoded
-        @POST("contrato/inquilinos")
-        Call <List<Contrato>> obtenerInquilinosxContrato(@Field("idpropietario") int idpropietario_);
-
-        @FormUrlEncoded
-        @POST("contrato/actuales")
-        Call <List<Contrato>> obtenerContratosActuales(@Field("idpropietario") int idpropietario_);
-
-// actualizar inmueble
+        @POST("inmueble/alta")
+        Call<String> altaInmueble(@Field("direccion") String direccion_,
+                                        @Field ("ambientes") int ambientes_,
+                                        @Field ("superficie") int superficie_,
+                                        @Field ("latitud") double latitud_,
+                                        @Field ("longitud") double longitud_,
+                                        @Field ("idpropietario") int idpropietario_,
+                                        @Field ("tipoinmueble") String tipoinmueble_,
+                                        @Field ("estado") String estado_,
+                                        @Field ("habilitado") String habilitado_,
+                                        @Field ("importe") double importe_,
+                                        @Field ("borrado") boolean borrado_,
+                                        @Header("Authorization")String token);
         @FormUrlEncoded
         @PUT("inmueble/actualizar")
         Call<String> actualizarInmueble(@Field("idinmueble") int idinmueble_,
-                                         @Field("direccion") String direccion_,
-                                         @Field ("ambientes") int ambientes_,
-                                         @Field ("superficie") int superficie_,
-                                         @Field ("latitud") double latitud_,
-                                         @Field ("longitud") double longitud_,
-                                         @Field ("idpropietario") int idpropietario_,
-                                         @Field ("tipoinmueble") String tipoinmueble_,
-                                         @Field ("borrado") boolean borrado_,
-                                         @Field ("importe") double importe_,
-                                         @Field ("estado") String estado_,
-                                         @Field ("habilitado") String habilitado_);
+                                        @Field("direccion") String direccion_,
+                                        @Field ("ambientes") int ambientes_,
+                                        @Field ("superficie") int superficie_,
+                                        @Field ("latitud") double latitud_,
+                                        @Field ("longitud") double longitud_,
+                                        @Field ("idpropietario") int idpropietario_,
+                                        @Field ("tipoinmueble") String tipoinmueble_,
+                                        @Field ("borrado") boolean borrado_,
+                                        @Field ("importe") double importe_,
+                                        @Field ("estado") String estado_,
+                                        @Field ("habilitado") String habilitado_,
+                                        @Header("Authorization")String token);
+
+        @FormUrlEncoded
+        @POST("propietario/propiedadesxpropietario")
+        Call <List<Inmueble>> obtenerPropiedadesxPropietario(@Field("idpropietario") int id_, @Header("Authorization") String token);
+        /// /////
+        @GET("contrato/inquilinos/{idpropietario}")
+        Call<List<Contrato>> obtenerInquilinosxContrato(@Path("idpropietario") int idpropietario_, @Header("Authorization") String token);
+        //@FormUrlEncoded
+        //@POST("contrato/inquilinos")
+        //Call <List<Contrato>> obtenerInquilinosxContrato(@Field("idpropietario") int idpropietario_,@Header("Authorization") String token);
+
+@GET("contrato/actuales/{idpropietario}")
+        Call<List<Contrato>> obtenerContratosActuales(@Path("idpropietario") int idpropietario_,@Header("Authorization") String token);
+//        @FormUrlEncoded
+//        @POST("contrato/actuales")
+//        Call <List<Contrato>> obtenerContratosActuales(@Field("idpropietario") int idpropietario_,@Header("Authorization") String token);
         }
 }

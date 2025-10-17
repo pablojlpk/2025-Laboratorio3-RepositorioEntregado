@@ -3,6 +3,7 @@ package com.programas.inmoprop.ui.inquilino;
 
 
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -34,15 +35,6 @@ public class InquilinoViewModel extends ViewModel {
 
     }
 
-
-/*
-    public InquilinoViewModel() {
-        //mText = new MutableLiveData<>();
-        mListadoInquilinos = new MutableLiveData<>();
-        mText.setValue("");
-    }
-
- */
     public LiveData<String> getmText() {
         if(mText==null){
             mText = new MutableLiveData<>();
@@ -50,37 +42,22 @@ public class InquilinoViewModel extends ViewModel {
         }
         return mText;
     }
-    public void obtenerInquilinos(int id_){
+    public void obtenerInquilinos(int id_, Context context){
         ApiClient.InmmobiliariaSetvice api = ApiClient.getApiInmobiliaria();
-
-        Call<List<Contrato>> llamada = api.obtenerInquilinosxContrato(id_);
+String token=ApiClient.getToken(context);
+        Call<List<Contrato>> llamada = api.obtenerInquilinosxContrato(id_, token);
         llamada.enqueue(new Callback<List<Contrato>>() {
             @Override
             public void onResponse(Call<List<Contrato>> call, Response<List<Contrato>> response) {
                 if (response.isSuccessful()) {
                     List<Contrato> lista=response.body();
                     List<Inquilino> listainquilinos = new ArrayList<>();
-                    Inquilino i=new Inquilino(25,"pablo","Lopez",23412222, "pp@pp.com","",false);
                     StringBuilder sb = new StringBuilder();
 
                     for (Contrato c : lista) {
                         listainquilinos.add(c.getDatosinquilino());
-/*
-                        sb.append(c.getDatosinquilino().getApellido()+","
-                                        + c.getDatosinquilino().getNombre()+"\n\n"
-
-                                        +"Inmueble Alquilado: "
-                                        +c.getDatosinmueble().getIdinmueble()
-                                        +c.getDatosinmueble().getDireccion())
-                                .append("\n\n");
-
-
-                        //sb.append(i.getDireccion().toString()).append("\n\n");
-*/
                     }
-
-                    //mText.setValue(sb.toString());
-                    mListadoInquilinos.setValue(listainquilinos);
+                   mListadoInquilinos.setValue(listainquilinos);
 
                 }
                 else {
@@ -91,12 +68,10 @@ public class InquilinoViewModel extends ViewModel {
             @Override
             public void onFailure(Call<List<Contrato>> call, Throwable t) {
                 mText.setValue("Error de Servidor");
-
-            }
-
-        });
+                }
+});
     }
 }
-//
+
 
 
