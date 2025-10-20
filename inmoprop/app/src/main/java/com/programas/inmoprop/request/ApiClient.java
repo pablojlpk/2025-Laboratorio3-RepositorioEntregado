@@ -117,15 +117,18 @@ public class ApiClient {
                                         @Field ("habilitado") String habilitado_,
                                         @Header("Authorization")String token);
 
+        /*
         @FormUrlEncoded
         @POST("propietario/propiedadesxpropietario")
         Call <List<Inmueble>> obtenerPropiedadesxPropietario(@Field("idpropietario") int id_, @Header("Authorization") String token);
+        */
+        @GET("propietario/propiedadesxpropietario")
+        Call <List<Inmueble>> obtenerPropiedadesxPropietario(@Header("Authorization") String token);
+
+
         /// /////
         @GET("contrato/inquilinos/{idpropietario}")
         Call<List<Contrato>> obtenerInquilinosxContrato(@Path("idpropietario") int idpropietario_, @Header("Authorization") String token);
-        //@FormUrlEncoded
-        //@POST("contrato/inquilinos")
-        //Call <List<Contrato>> obtenerInquilinosxContrato(@Field("idpropietario") int idpropietario_,@Header("Authorization") String token);
 
 @GET("contrato/actuales/{idpropietario}")
         Call<List<Contrato>> obtenerContratosActuales(@Path("idpropietario") int idpropietario_,@Header("Authorization") String token);

@@ -43,11 +43,13 @@ public class SlideshowViewModel extends ViewModel {
     }
 
 
-    public void obtenerPropiedadesxPropietario(int id_, Context context){
+    public void obtenerPropiedadesxPropietario( Context context){
 
         ApiClient.InmmobiliariaSetvice api = ApiClient.getApiInmobiliaria();
         String token = ApiClient.getToken(context);
-        Call<List<Inmueble>> llamada = api.obtenerPropiedadesxPropietario(id_, token);
+
+        //Call<List<Inmueble>> llamada = api.obtenerPropiedadesxPropietario(id_, token);
+        Call<List<Inmueble>> llamada = api.obtenerPropiedadesxPropietario(token);
 
         llamada.enqueue(new Callback<List<Inmueble>>() {
             @Override

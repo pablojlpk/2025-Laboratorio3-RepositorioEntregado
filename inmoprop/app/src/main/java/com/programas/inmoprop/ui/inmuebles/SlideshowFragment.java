@@ -48,7 +48,7 @@ public class SlideshowFragment extends Fragment {
 
         MenuActivity menuActivity = (MenuActivity) getActivity();
         int idprop = menuActivity.getIdprop();
-        vm.obtenerPropiedadesxPropietario(idprop, getContext());
+        vm.obtenerPropiedadesxPropietario( getContext());
         //int idinmueble = 15;
 
         vm.getmListado().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
