@@ -51,8 +51,8 @@
     <fragment
         android:id="@+id/detalleInmuebleFragment"
         android:name="com.programas.inmoprop.ui.inmuebles.DetalleInmuebleFragment"
-        android:label="fragment_detalle_inmueble"
-        tools:layout="@layout/fragment_detalle_inmueble" >
+        android:label="Datos del  Inmueble"
+        tools:layout="@layout/fragment_detalle_inmueble">
         <action
             android:id="@+id/action_detalleInmuebleFragment_to_nav_slideshow"
             app:destination="@id/nav_slideshow" />
@@ -60,8 +60,8 @@
     <fragment
         android:id="@+id/detalleContratoFragment"
         android:name="com.programas.inmoprop.ui.contrato.DetalleContratoFragment"
-        android:label="fragment_detalle_contrato"
-        tools:layout="@layout/fragment_detalle_contrato" >
+        android:label="Datos Contrato"
+        tools:layout="@layout/fragment_detalle_contrato">
         <action
             android:id="@+id/action_detalleContratoFragment_to_nav_contrato"
             app:destination="@id/nav_contrato" />
@@ -72,8 +72,8 @@
     <fragment
         android:id="@+id/altaInmuebleFragment"
         android:name="com.programas.inmoprop.ui.inmuebles.AltaInmuebleFragment"
-        android:label="fragment_alta_inmueble"
-        tools:layout="@layout/fragment_alta_inmueble" >
+        android:label="Alta Inmueble"
+        tools:layout="@layout/fragment_alta_inmueble">
         <action
             android:id="@+id/action_altaInmuebleFragment_to_nav_slideshow"
             app:destination="@id/nav_slideshow" />
@@ -81,8 +81,8 @@
     <fragment
         android:id="@+id/pagosContratoFragment"
         android:name="com.programas.inmoprop.ui.contrato.PagosContratoFragment"
-        android:label="fragment_pagos_contrato"
-        tools:layout="@layout/fragment_pagos_contrato" >
+        android:label="Pagos Registrados "
+        tools:layout="@layout/fragment_pagos_contrato">
         <action
             android:id="@+id/action_pagosContratoFragment_to_detalleContratoFragment"
             app:destination="@id/detalleContratoFragment" />
