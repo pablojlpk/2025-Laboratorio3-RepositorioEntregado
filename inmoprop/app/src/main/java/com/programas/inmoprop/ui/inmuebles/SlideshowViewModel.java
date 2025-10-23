@@ -56,15 +56,15 @@ public class SlideshowViewModel extends ViewModel {
             public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
                 if (response.isSuccessful()) {
                     List<Inmueble> lista=response.body();
-                    mListado.setValue(lista);
+                    mListado.postValue(lista);
                 }
                 else {
-                    mText.setValue("No posee Propiedades");
+                    mText.postValue("No posee Propiedades");
                 }
             }
             @Override
             public void onFailure(Call<List<Inmueble>> call, Throwable t) {
-                mText.setValue("Error de Servidor");
+                mText.postValue("Error de Servidor");
             }
         });
     }

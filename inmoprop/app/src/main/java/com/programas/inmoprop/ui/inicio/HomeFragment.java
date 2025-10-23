@@ -42,10 +42,7 @@ import com.programas.inmoprop.ui.contrato.ContratoViewModel;
             public void onChanged(HomeViewModel.MapaActual mapaActual) {
                 SupportMapFragment mapFragment = (SupportMapFragment)
                         getChildFragmentManager().findFragmentById(R.id.map);
-                if (mapFragment != null) {
-                    mapFragment.getMapAsync(mapaActual);
-                }
-
+            mapFragment.getMapAsync(mapaActual);
             }
         });
 

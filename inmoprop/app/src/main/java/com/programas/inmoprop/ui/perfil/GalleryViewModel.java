@@ -55,15 +55,15 @@ public class GalleryViewModel extends ViewModel {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         if (response.isSuccessful()) { //pregunto si la respuesta es satisfactoria
-                            mText.setValue("Datos Actualizados Correctamente");
+                            mText.postValue("Datos Actualizados Correctamente");
                         } else {
-                            mText.setValue("No se ha podido actualizar. reintente");
+                            mText.postValue("No se ha podido actualizar. reintente");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        mText.setValue("Error de Servidor");
+                        mText.postValue("Error de Servidor");
                     }
                 });
             }

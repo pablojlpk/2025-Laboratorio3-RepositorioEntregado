@@ -52,22 +52,22 @@ String token=ApiClient.getToken(context);
                 if (response.isSuccessful()) {
                     List<Contrato> lista=response.body();
                     List<Inquilino> listainquilinos = new ArrayList<>();
-                    StringBuilder sb = new StringBuilder();
+                    //StringBuilder sb = new StringBuilder();
 
                     for (Contrato c : lista) {
                         listainquilinos.add(c.getDatosinquilino());
                     }
-                   mListadoInquilinos.setValue(listainquilinos);
+                   mListadoInquilinos.postValue(listainquilinos);
 
                 }
                 else {
-                    mText.setValue("No posee Inquilinos actuales");
+                    mText.postValue("No posee Inquilinos actuales");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Contrato>> call, Throwable t) {
-                mText.setValue("Error de Servidor");
+                mText.postValue("Error de Servidor");
                 }
 });
     }

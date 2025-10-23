@@ -86,7 +86,7 @@ public class AltaInmuebleViewModel extends ViewModel {
              }
              @Override
              public void onFailure(Call<String> call, Throwable t) {
-                 mCartel.setValue("Error de Servidor");
+                 mCartel.postValue("Error de Servidor");
              }
          });
      }

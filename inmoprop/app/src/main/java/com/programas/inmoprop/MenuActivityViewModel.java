@@ -69,7 +69,7 @@ public LiveData<Propietario> getmPropietario(){
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                mCartelUsuario.setValue("Error de Servidor");
+                mCartelUsuario.postValue("Error de Servidor");
             }
         });
     }
