@@ -31,10 +31,7 @@ public class ApiClient {
 
     //public static final String URLBASE ="http://192.168.0.169:5126/api/";// casa
     public static final String URLBASE = "http://10.0.2.2:5126/api/";//virtual
-
-  //public static final String URLBASE = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/";//virtual
-
-
+    //public static final String URLBASE = "http://10.1.219.78:5126/api/";//virtual
     public static InmmobiliariaSetvice getApiInmobiliaria() {
 
         Gson gson = new GsonBuilder()
@@ -127,11 +124,13 @@ public class ApiClient {
 
 
         /// /////
-        @GET("contrato/inquilinos/{idpropietario}")
-        Call<List<Contrato>> obtenerInquilinosxContrato(@Path("idpropietario") int idpropietario_, @Header("Authorization") String token);
+        //@GET("contrato/inquilinos/{idpropietario}")
+        @GET("contrato/inquilinos")
+        Call<List<Contrato>> obtenerInquilinosxContrato( @Header("Authorization") String token);
 
-@GET("contrato/actuales/{idpropietario}")
-        Call<List<Contrato>> obtenerContratosActuales(@Path("idpropietario") int idpropietario_,@Header("Authorization") String token);
+//@GET("contrato/actuales/{idpropietario}")
+@GET("contrato/actuales")
+        Call<List<Contrato>> obtenerContratosActuales(@Header("Authorization") String token);
 //        @FormUrlEncoded
 //        @POST("contrato/actuales")
 //        Call <List<Contrato>> obtenerContratosActuales(@Field("idpropietario") int idpropietario_,@Header("Authorization") String token);

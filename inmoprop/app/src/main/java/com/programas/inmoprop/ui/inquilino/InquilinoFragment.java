@@ -70,8 +70,8 @@ public class InquilinoFragment extends Fragment {
 
      });
 
-     MenuActivity menuActivity = (MenuActivity) getActivity();
-     vm.obtenerInquilinos(menuActivity.getIdprop(), context );
+     //MenuActivity menuActivity = (MenuActivity) getActivity();
+     vm.obtenerInquilinos( context );
 return root;
     }
 

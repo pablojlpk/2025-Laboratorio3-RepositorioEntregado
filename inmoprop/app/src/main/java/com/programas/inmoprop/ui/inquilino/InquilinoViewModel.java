@@ -42,10 +42,10 @@ public class InquilinoViewModel extends ViewModel {
         }
         return mText;
     }
-    public void obtenerInquilinos(int id_, Context context){
+    public void obtenerInquilinos( Context context){
         ApiClient.InmmobiliariaSetvice api = ApiClient.getApiInmobiliaria();
 String token=ApiClient.getToken(context);
-        Call<List<Contrato>> llamada = api.obtenerInquilinosxContrato(id_, token);
+        Call<List<Contrato>> llamada = api.obtenerInquilinosxContrato( token);
         llamada.enqueue(new Callback<List<Contrato>>() {
             @Override
             public void onResponse(Call<List<Contrato>> call, Response<List<Contrato>> response) {

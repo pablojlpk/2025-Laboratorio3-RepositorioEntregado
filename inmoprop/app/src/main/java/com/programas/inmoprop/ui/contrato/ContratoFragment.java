@@ -62,7 +62,7 @@ private ContratoViewModel vm;
 
         MenuActivity menuActivity = (MenuActivity) getActivity();
         int idp= menuActivity.getIdprop();
-        vm.obtenerContratos(idp, getContext());
+        vm.obtenerContratos( getContext());
 
         return root;
 

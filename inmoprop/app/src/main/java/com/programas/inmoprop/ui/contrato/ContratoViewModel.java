@@ -39,10 +39,10 @@ public class ContratoViewModel extends ViewModel{
         return mText;
     }
 
-    public void obtenerContratos(int id, Context context) {
+    public void obtenerContratos(Context context) {
         ApiClient.InmmobiliariaSetvice api = ApiClient.getApiInmobiliaria();
         String token = ApiClient.getToken(context);
-        Call<List<Contrato>> llamada = api.obtenerContratosActuales(id,token);
+        Call<List<Contrato>> llamada = api.obtenerContratosActuales(token);
         llamada.enqueue(new Callback<List<Contrato>>() {
             @Override
             public void onResponse(Call<List<Contrato>> call, Response<List<Contrato>> response) {
