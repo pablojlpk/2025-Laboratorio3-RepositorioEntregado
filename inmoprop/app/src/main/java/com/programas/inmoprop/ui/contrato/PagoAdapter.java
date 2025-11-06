@@ -19,6 +19,7 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
     private List<Pago> listado;
     private Context context;
     private LayoutInflater li;
+    private java.text.SimpleDateFormat formatofecha=new java.text.SimpleDateFormat("dd/MM/yyyy");
     public PagoAdapter(List<Pago> listado, Context context, LayoutInflater li){
         this.listado=listado;
         this.context=context;
@@ -53,7 +54,8 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
     public void onBindViewHolder(@NonNull PagoAdapter.PagoViewHolder holder, int position) {
         Pago pagoactual=listado.get(position);
         holder.idpago.setText("Recibo Nro: "+pagoactual.getIdpago());
-        holder.fpago.setText("Fecha Pago: "+pagoactual.getFpago().toString());
+        holder.fpago.setText("Fecha Pago: "+formatofecha.format(pagoactual.getFpago()));
+        //holder.fpago.setText("Fecha Pago: "+pagoactual.getFpago().toString());
         holder.importe.setText("Importe: "+pagoactual.getImporte());
         holder.anulado.setChecked(pagoactual.getAnulado());
         holder.detalle.setText("Detalle: "+pagoactual.getDetalle());

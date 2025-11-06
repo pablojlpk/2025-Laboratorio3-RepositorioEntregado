@@ -25,6 +25,7 @@ public class DetalleContratoFragment extends Fragment {
 
     private DetalleContratoViewModel vm;
     private FragmentDetalleContratoBinding binding;
+    private java.text.SimpleDateFormat formatofecha=new java.text.SimpleDateFormat("dd/MM/yyyy");
 
 
 
@@ -41,8 +42,8 @@ public class DetalleContratoFragment extends Fragment {
         @Override
         public void onChanged(Contrato contrato) {
             binding.tvTituloContrato.setText(binding.tvTituloContrato.getText()+" " +contrato.getIdcontrato());
-            binding.etFechas.setText(("Fecha Desde: "+contrato.getFdesde()
-                    +" Hasta: "+contrato.getFhasta())
+            binding.etFechas.setText(("Fecha Desde: "+formatofecha.format(contrato.getFdesde())
+                    +" Hasta: "+formatofecha.format(contrato.getFhasta()))
             );
             binding.etImporte.setText("$: "+contrato.getImporte()
             );

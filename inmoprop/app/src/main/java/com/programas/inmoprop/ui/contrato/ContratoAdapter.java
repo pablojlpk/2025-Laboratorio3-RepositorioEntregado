@@ -24,6 +24,7 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.Contra
     private List<Contrato> listado;
     private Context context;
     private LayoutInflater li;
+    private java.text.SimpleDateFormat formatofecha=new java.text.SimpleDateFormat("dd/MM/yyyy");
 
     public ContratoAdapter(List<Contrato> listado, Context context, LayoutInflater li){
         this.listado=listado;
@@ -62,7 +63,7 @@ public class ContratoViewHolder extends RecyclerView.ViewHolder{
         holder.inquilino.setText("Inquilino: "+
                 contratoactual.getDatosinquilino().getApellido()
         +", "+ contratoactual.getDatosinquilino().getNombre());
-        holder.fecha.setText("Fecha: "+contratoactual.getFhasta().toString());
+        holder.fecha.setText("Fecha: "+formatofecha.format(contratoactual.getFhasta()));
 
         holder.btdetalle.setOnClickListener(new View.OnClickListener() {
             @Override
