@@ -67,7 +67,7 @@ public class MainActivityViewModel extends AndroidViewModel {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) { //pregunto si la respuesta es satisfactoria
                     mMensaje.postValue("Bienvenido ");
-                    desactivarSensor();
+
                     String token=response.body();
                     ApiClient.setToken(context,"Bearer "+token);
                     Log.d("tokenobtenido",token);

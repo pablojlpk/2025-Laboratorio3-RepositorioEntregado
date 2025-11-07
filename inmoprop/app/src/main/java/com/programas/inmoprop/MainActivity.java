@@ -1,10 +1,13 @@
 package com.programas.inmoprop;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -16,7 +19,8 @@ import com.programas.inmoprop.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-private MainActivityViewModel vm;
+    private static final int REQUEST_CALL_PERMISSION = 1;
+    private MainActivityViewModel vm;
     private ActivityMainBinding binding;
 
 
@@ -26,10 +30,9 @@ private MainActivityViewModel vm;
         super.onCreate(savedInstanceState);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainActivityViewModel.class);
         binding= ActivityMainBinding.inflate(getLayoutInflater());
-
-
-        setContentView(binding.getRoot());
-
+setContentView(binding.getRoot());
+vm.activarSensor();
+verificarPermisosParaLLamar();
 binding.edTUsuario.setText("omarfuentes@gmail.com");
 binding.edTClave.setText("123");
         vm.getmMensaje().observe(this, new Observer<String>() {
@@ -48,12 +51,19 @@ binding.edTClave.setText("123");
                 //vm.controlLogin(usua,clav);
                // vm.login(usua,clav);
                 vm.loginToken(usua,clav);
-
-
-
             }
         });
 
+    }
+    private void verificarPermisosParaLLamar() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    REQUEST_CALL_PERMISSION
+            );
+        }
     }
 
 }

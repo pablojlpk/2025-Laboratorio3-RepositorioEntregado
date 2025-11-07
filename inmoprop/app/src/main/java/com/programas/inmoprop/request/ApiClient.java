@@ -29,8 +29,8 @@ import retrofit2.http.Path;
 public class ApiClient {
 
 
-    //public static final String URLBASE ="http://192.168.0.169:5126/api/";// casa
-    public static final String URLBASE = "http://10.0.2.2:5126/api/";//virtual
+    public static final String URLBASE ="http://192.168.0.169:5126/api/";// casa
+    //public static final String URLBASE = "http://10.0.2.2:5126/api/";//virtual
     //public static final String URLBASE = "http://10.1.219.78:5126/api/";//virtual10.1.219.78
     public static InmmobiliariaSetvice getApiInmobiliaria() {
 

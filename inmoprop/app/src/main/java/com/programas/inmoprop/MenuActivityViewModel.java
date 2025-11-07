@@ -1,7 +1,17 @@
 package com.programas.inmoprop;
 
+import static android.content.Context.SENSOR_SERVICE;
+
+import android.Manifest;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.net.Uri;
 import android.util.Log;
 import android.view.ContentInfo;
 import android.view.View;
@@ -9,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -18,6 +29,8 @@ import com.google.gson.Gson;
 import com.programas.inmoprop.modelos.Propietario;
 import com.programas.inmoprop.request.ApiClient;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,6 +39,9 @@ public class MenuActivityViewModel extends AndroidViewModel {
 private MutableLiveData<String> mCartelUsuario;
 private MutableLiveData<Propietario> mPropietario;
 private Context context;
+
+
+
     public MenuActivityViewModel(@NonNull Application application) {
         super(application);
         context=getApplication();
@@ -46,10 +62,7 @@ public LiveData<Propietario> getmPropietario(){
     }
 
     public void setmCartelUsuario(String cartel){
-
-
-
-        mCartelUsuario.setValue(cartel);
+         mCartelUsuario.setValue(cartel);
     }
     public void obtenerPropietario(){
         ApiClient.InmmobiliariaSetvice api = ApiClient.getApiInmobiliaria();
@@ -73,4 +86,7 @@ public LiveData<Propietario> getmPropietario(){
             }
         });
     }
+
+
+
 }
